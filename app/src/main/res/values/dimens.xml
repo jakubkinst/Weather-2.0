@@ -1,8 +1,8 @@
 <resources>
-    <dimen name="app_bar_height">180dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
-    <dimen name="spacing_24">24dp</dimen>
-    <dimen name="spacing_8">8dp</dimen>
-    <dimen name="spacing_16">16dp</dimen>
+	<dimen name="app_bar_height">240dp</dimen>
+	<dimen name="fab_margin">16dp</dimen>
+	<dimen name="text_margin">16dp</dimen>
+	<dimen name="spacing_24">24dp</dimen>
+	<dimen name="spacing_8">8dp</dimen>
+	<dimen name="spacing_16">16dp</dimen>
 </resources>
