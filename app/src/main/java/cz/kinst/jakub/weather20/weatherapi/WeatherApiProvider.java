@@ -24,7 +24,7 @@ public class WeatherApiProvider {
 		@GET("/data/2.5/weather?appid=" + WEATHER_APP_ID)
 		Call<CurrentWeatherResponse> getCurrent(@Query("lat") double latitude, @Query("lon") double longitude);
 
-		@GET("/data/2.5/forecast/daily?appid=" + WEATHER_APP_ID)
+		@GET("/data/2.5/forecast/daily?cnt=16&appid=" + WEATHER_APP_ID)
 		Call<WeatherForecastResponse> getForecast(@Query("lat") double latitude, @Query("lon") double longitude);
 	}
 
