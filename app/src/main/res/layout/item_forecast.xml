@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<import type="java.text.DateFormat"/>
+
+		<variable
+			name="forecast"
+			type="cz.kinst.jakub.weather20.api.openweathermap.WeatherForecastResponse.Forecast"/>
+	</data>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<cz.kinst.jakub.weather20.view.TintableImageView
+			android:layout_width="32dp"
+			android:layout_height="32dp"
+			android:layout_gravity="center"
+			android:layout_marginBottom="@dimen/spacing_16"
+			android:layout_marginLeft="@dimen/spacing_16"
+			android:layout_marginTop="@dimen/spacing_16"
+			app:imageUrl="@{forecast.weatherIconUrl}"
+			app:tint="@color/theme_primary"/>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			android:padding="@dimen/spacing_16">
+
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_marginRight="@dimen/spacing_4"
+					android:text="@{forecast.dayName}"
+					android:textAppearance="@style/TextAppearance.AppCompat.Title"
+					android:textColor="@color/theme_primary"
+					tools:text="Monday"/>
+
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom"
+					android:layout_weight="1"
+					android:alpha="0.4"
+					android:text="@{DateFormat.getDateInstance().format(forecast.date)}"
+					android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+					tools:text="12 Sep 2015"/>
+			</LinearLayout>
+
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginTop="@dimen/spacing_4"
+				android:text="@{forecast.weather[0].main}"
+				android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+				tools:text="Clear"/>
+		</LinearLayout>
+
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:padding="@dimen/spacing_16"
+			android:text="@{forecast.temperature}"
+			android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+			android:textColor="@color/theme_accent"
+			android:textSize="40sp"
+			tools:text="30°"/>
+	</LinearLayout>
+
+</layout>

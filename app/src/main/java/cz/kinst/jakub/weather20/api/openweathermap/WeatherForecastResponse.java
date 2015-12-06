@@ -1,7 +1,9 @@
-package cz.kinst.jakub.weather20.weatherapi;
+package cz.kinst.jakub.weather20.api.openweathermap;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import cz.kinst.jakub.weather20.utility.StringUtility;
 
 
 /**
@@ -38,7 +40,7 @@ public class WeatherForecastResponse {
 
 		public String getDayName() {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
-			return dateFormat.format(getDate());
+			return StringUtility.capitalize(dateFormat.format(getDate()));
 		}
 
 
@@ -49,6 +51,11 @@ public class WeatherForecastResponse {
 
 		public String getTemperature() {
 			return TemperatureUtility.getFormattedTemperature(getTemp().getDay());
+		}
+
+
+		public String getWeatherIconUrl() {
+			return String.format("http://openweathermap.org/img/w/%s.png", getWeather().get(0).getIcon());
 		}
 
 

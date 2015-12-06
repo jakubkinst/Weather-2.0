@@ -5,6 +5,8 @@
 
 	<data>
 
+		<import type="cz.kinst.jakub.view.StatefulLayout.State"/>
+
 		<variable
 			name="viewModel"
 			type="cz.kinst.jakub.weather20.viewmodel.MainViewModel"/>
@@ -14,7 +16,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:fitsSystemWindows="true"
-		tools:context="cz.kinst.jakub.weather20.MainActivity">
+		tools:context=".activity.MainActivity">
 
 		<android.support.design.widget.AppBarLayout
 			android:id="@+id/app_bar"
@@ -31,7 +33,7 @@
 				app:contentScrim="?attr/colorPrimary"
 				app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-				<ImageView
+				<com.flaviofaria.kenburnsview.KenBurnsView
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
 					android:fitsSystemWindows="true"
@@ -39,53 +41,65 @@
 					app:imageUrl="@{viewModel.locationPhotoUrl}"
 					app:layout_collapseMode="parallax"/>
 
+				<ImageView
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:alpha="0.4"
+					android:fitsSystemWindows="true"
+					android:scaleType="centerCrop"
+					android:src="@color/theme_primary"
+					app:layout_collapseMode="parallax"/>
 
-
-					<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="bottom|left"
-						android:layout_marginBottom="56dp"
-						android:layout_marginLeft="30dp"
-						android:text="@{viewModel.currentWeather.currentTemperature}"
-						android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-						android:textSize="60sp"
-						tools:text="23°"/>
-
-
-
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="bottom|left"
+					android:layout_marginBottom="56dp"
+					android:layout_marginLeft="30dp"
+					android:text="@{viewModel.currentWeather.currentTemperature}"
+					android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+					android:textSize="60sp"
+					tools:text="23°"/>
 
 				<android.support.v7.widget.Toolbar
 					android:id="@+id/toolbar"
 					android:layout_width="match_parent"
 					android:layout_height="?attr/actionBarSize"
 					app:layout_collapseMode="pin"
+					app:popupTheme="@style/AppTheme.PopupOverlay"
 					app:title="@{viewModel.currentWeather.name}"
-					tools:title="Prague"
-					app:popupTheme="@style/AppTheme.PopupOverlay"/>
+					tools:title="Prague"/>
 
 			</android.support.design.widget.CollapsingToolbarLayout>
 		</android.support.design.widget.AppBarLayout>
 
-		<android.support.v7.widget.RecyclerView
+		<cz.kinst.jakub.view.StatefulLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:clipToPadding="false"
-			android:paddingTop="@dimen/spacing_24"
-			app:itemView="@{viewModel.forecastItemView}"
-			app:items="@{viewModel.weatherForecast}"
-			app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-			app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+			android:fitsSystemWindows="true"
+			app:layout_behavior="@string/appbar_scrolling_view_behavior"
+			app:state="@{viewModel.currentWeather != null &amp;&amp; viewModel.weatherForecast != null ? State.CONTENT : State.PROGRESS}">
+
+			<android.support.v7.widget.RecyclerView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:clipToPadding="false"
+				android:paddingTop="@dimen/spacing_24"
+				app:itemView="@{viewModel.forecastItemView}"
+				app:items="@{viewModel.weatherForecast}"
+				app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+		</cz.kinst.jakub.view.StatefulLayout>
 
 		<android.support.design.widget.FloatingActionButton
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_margin="@dimen/fab_margin"
-			android:onClick="@{viewModel.onRefreshClicked}"
+			android:onClick="@{viewModel.onClickRefresh}"
 			android:src="@drawable/ic_cached_24dp"
 			app:layout_anchor="@id/app_bar"
 			app:layout_anchorGravity="bottom|end"/>
 
 	</android.support.design.widget.CoordinatorLayout>
+
 </layout>
 

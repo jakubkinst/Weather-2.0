@@ -1,4 +1,4 @@
-package cz.kinst.jakub.weather20.weatherapi;
+package cz.kinst.jakub.weather20.api.openweathermap;
 
 /**
  * Created by jakubkinst on 10/11/15.

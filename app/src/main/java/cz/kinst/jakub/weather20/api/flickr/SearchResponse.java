@@ -1,4 +1,4 @@
-package cz.kinst.jakub.weather20.flickrapi;
+package cz.kinst.jakub.weather20.api.flickr;
 
 import java.util.List;
 
