@@ -26,7 +26,7 @@ public abstract class RetrofitCallViewModel<S> extends BaseViewModel<S> {
 	protected <T> void enqueueCall(String callId, Call<T> call, Callback<T> callback) {
 		Call existingCall = mCalls.get(callId);
 		if(existingCall != null)
-			existingCall.cancel();
+			new Thread(existingCall::cancel).start();
 		mCalls.put(callId, call);
 		call.enqueue(callback);
 	}
@@ -34,7 +34,8 @@ public abstract class RetrofitCallViewModel<S> extends BaseViewModel<S> {
 
 	protected void clearCalls() {
 		for(String callId : mCalls.keySet()) {
-			mCalls.get(callId).cancel();
+			new Thread(mCalls.get(callId)::cancel).start();
 		}
+		mCalls.clear();
 	}
 }

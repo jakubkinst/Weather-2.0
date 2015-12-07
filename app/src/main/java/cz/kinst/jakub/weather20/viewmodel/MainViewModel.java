@@ -13,6 +13,7 @@ import android.view.View;
 
 import java.util.Random;
 
+import cz.kinst.jakub.viewmodelbinding.permissions.PermissionHelperProvider;
 import cz.kinst.jakub.weather20.BR;
 import cz.kinst.jakub.weather20.Preferences;
 import cz.kinst.jakub.weather20.R;
@@ -22,7 +23,6 @@ import cz.kinst.jakub.weather20.api.openweathermap.CurrentWeatherResponse;
 import cz.kinst.jakub.weather20.api.openweathermap.WeatherApiProvider;
 import cz.kinst.jakub.weather20.api.openweathermap.WeatherForecastResponse;
 import cz.kinst.jakub.weather20.databinding.ActivityMainBinding;
-import cz.kinst.jakub.weather20.viewmodel.extensions.PermissionManagerProvider;
 import cz.kinst.jakub.weather20.viewmodel.extensions.RetrofitCallViewModel;
 import me.tatarka.bindingcollectionadapter.ItemView;
 import retrofit.Callback;
@@ -53,10 +53,10 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 	public void onViewAttached(boolean firstAttachment) {
 		super.onViewAttached(firstAttachment);
 		if(firstAttachment) {
-			if(((PermissionManagerProvider) getActivity()).getRuntimePermissionManager().checkGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION))
+			if(((PermissionHelperProvider) getActivity()).getPermissionHelper().checkGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION))
 				onLocationGranted();
 			else
-				((PermissionManagerProvider) getActivity()).getRuntimePermissionManager().requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, (results) -> {
+				((PermissionHelperProvider) getActivity()).getPermissionHelper().requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, (results) -> {
 					if(results.get(Manifest.permission.ACCESS_FINE_LOCATION))
 						onLocationGranted();
 				});

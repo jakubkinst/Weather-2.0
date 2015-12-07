@@ -8,18 +8,17 @@ import android.view.MenuItem;
 
 import cz.kinst.jakub.viewmodelbinding.BaseViewModel;
 import cz.kinst.jakub.viewmodelbinding.BaseViewModelActivity;
+import cz.kinst.jakub.viewmodelbinding.permissions.PermissionHelperProvider;
+import cz.kinst.jakub.viewmodelbinding.permissions.PermissionsHelper;
 import cz.kinst.jakub.weather20.Preferences;
 import cz.kinst.jakub.weather20.R;
 import cz.kinst.jakub.weather20.databinding.ActivityMainBinding;
 import cz.kinst.jakub.weather20.viewmodel.MainViewModel;
-import cz.kinst.jakub.weather20.viewmodel.extensions.PermissionManagerProvider;
-import cz.kinst.jakub.weather20.viewmodel.extensions.PermissionsManager;
 
 
-public class MainActivity extends BaseViewModelActivity<ActivityMainBinding, MainViewModel> implements PermissionManagerProvider {
+public class MainActivity extends BaseViewModelActivity<ActivityMainBinding, MainViewModel> implements PermissionHelperProvider {
 
-	private PermissionsManager mPermissionsManager = new PermissionsManager(this);
-	;
+	private PermissionsHelper mPermissionsHelper = new PermissionsHelper(this);
 
 
 	@Override
@@ -36,14 +35,14 @@ public class MainActivity extends BaseViewModelActivity<ActivityMainBinding, Mai
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-		mPermissionsManager.onRequestPermissionResult(requestCode, permissions, grantResults);
+		mPermissionsHelper.onRequestPermissionResult(requestCode, permissions, grantResults);
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
 
 	@Override
-	public PermissionsManager getRuntimePermissionManager() {
-		return mPermissionsManager;
+	public PermissionsHelper getPermissionHelper() {
+		return mPermissionsHelper;
 	}
 
 
