@@ -5,8 +5,6 @@
 
 	<data>
 
-		<import type="cz.kinst.jakub.view.StatefulLayout.State"/>
-
 		<variable
 			name="viewModel"
 			type="cz.kinst.jakub.weather20.viewmodel.MainViewModel"/>
@@ -78,7 +76,7 @@
 			android:layout_height="match_parent"
 			android:fitsSystemWindows="true"
 			app:layout_behavior="@string/appbar_scrolling_view_behavior"
-			app:state="@{viewModel.currentWeather != null &amp;&amp; viewModel.weatherForecast != null ? State.CONTENT : State.PROGRESS}">
+			app:state="@{viewModel.state}">
 
 			<android.support.v7.widget.RecyclerView
 				android:layout_width="match_parent"

@@ -16,6 +16,7 @@ import com.annimon.stream.Stream;
 
 import java.util.Random;
 
+import cz.kinst.jakub.view.StatefulLayout;
 import cz.kinst.jakub.viewmodelbinding.permissions.PermissionHelperProvider;
 import cz.kinst.jakub.weather20.BR;
 import cz.kinst.jakub.weather20.Preferences;
@@ -53,6 +54,7 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 	public final ObservableField<CurrentWeatherResponse> currentWeather = new ObservableField<>();
 	public final ObservableField<String> locationPhotoUrl = new ObservableField<>();
 	public final ObservableField<Location> location = new ObservableField<>();
+	public final ObservableField<StatefulLayout.State> state = new ObservableField<>(StatefulLayout.State.PROGRESS);
 
 
 	@Override
@@ -61,6 +63,7 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 
 		// do on first attachment only - ViewModel has just been created
 		if(firstAttachment) {
+			state.set(StatefulLayout.State.PROGRESS);
 			if(((PermissionHelperProvider) getActivity()).getPermissionHelper().checkGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION))
 				onLocationGranted();
 			else
@@ -129,6 +132,7 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 			@Override
 			public void onResponse(Response<CurrentWeatherResponse> response, Retrofit retrofit) {
 				currentWeather.set(response.body());
+				if(!weatherForecast.isEmpty()) state.set(StatefulLayout.State.CONTENT);
 			}
 
 
@@ -144,6 +148,7 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 			public void onResponse(Response<WeatherForecastResponse> response, Retrofit retrofit) {
 				weatherForecast.clear();
 				weatherForecast.addAll(Stream.of(response.body().getList()).map(f -> new ForecastItemViewModel(f, MainViewModel.this)).collect(Collectors.toList()));
+				if(currentWeather.get() != null) state.set(StatefulLayout.State.CONTENT);
 			}
 
 
