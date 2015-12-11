@@ -11,6 +11,9 @@ import android.location.LocationManager;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
+
 import java.util.Random;
 
 import cz.kinst.jakub.viewmodelbinding.permissions.PermissionHelperProvider;
@@ -23,6 +26,7 @@ import cz.kinst.jakub.weather20.api.openweathermap.CurrentWeatherResponse;
 import cz.kinst.jakub.weather20.api.openweathermap.WeatherApiProvider;
 import cz.kinst.jakub.weather20.api.openweathermap.WeatherForecastResponse;
 import cz.kinst.jakub.weather20.databinding.ActivityMainBinding;
+import cz.kinst.jakub.weather20.handler.ForecastItemHandler;
 import cz.kinst.jakub.weather20.viewmodel.extensions.RetrofitCallViewModel;
 import me.tatarka.bindingcollectionadapter.ItemView;
 import retrofit.Callback;
@@ -33,8 +37,9 @@ import retrofit.Retrofit;
 /**
  * Created by jakubkinst on 02/12/15.
  */
-public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> implements SharedPreferences.OnSharedPreferenceChangeListener, ForecastItemHandler {
 
+	// Call IDs
 	private static final String CALL_WEATHER_CURRENT = "weather_current";
 	private static final String CALL_WEATHER_FORECAST = "weather_forecast";
 	private static final String CALL_FLICKR_IMAGE = "flickr_image";
@@ -42,8 +47,9 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 	private static final double DEFAULT_LATITUDE = 50.088182;
 	private static final double DEFAULT_LONGITUDE = 14.420210;
 
-	public final ItemView forecastItemView = ItemView.of(BR.forecast, R.layout.item_forecast);
-	public final ObservableList<WeatherForecastResponse.Forecast> weatherForecast = new ObservableArrayList<>();
+	// public fields and observables
+	public final ItemView forecastItemView = ItemView.of(BR.itemViewModel, R.layout.item_forecast);
+	public final ObservableList<ForecastItemViewModel> weatherForecast = new ObservableArrayList<>();
 	public final ObservableField<CurrentWeatherResponse> currentWeather = new ObservableField<>();
 	public final ObservableField<String> locationPhotoUrl = new ObservableField<>();
 	public final ObservableField<Location> location = new ObservableField<>();
@@ -52,6 +58,8 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 	@Override
 	public void onViewAttached(boolean firstAttachment) {
 		super.onViewAttached(firstAttachment);
+
+		// do on first attachment only - ViewModel has just been created
 		if(firstAttachment) {
 			if(((PermissionHelperProvider) getActivity()).getPermissionHelper().checkGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION))
 				onLocationGranted();
@@ -82,6 +90,12 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 	public void onModelRemoved() {
 		Preferences.get().unregisterListener(this);
 		super.onModelRemoved();
+	}
+
+
+	@Override
+	public void onForecastClicked(WeatherForecastResponse.Forecast forecast) {
+		Snackbar.make(getBinding().getRoot(), "Forecast item clicked", Snackbar.LENGTH_SHORT).show();
 	}
 
 
@@ -129,7 +143,7 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 			@Override
 			public void onResponse(Response<WeatherForecastResponse> response, Retrofit retrofit) {
 				weatherForecast.clear();
-				weatherForecast.addAll(response.body().getList());
+				weatherForecast.addAll(Stream.of(response.body().getList()).map(f -> new ForecastItemViewModel(f, MainViewModel.this)).collect(Collectors.toList()));
 			}
 
 

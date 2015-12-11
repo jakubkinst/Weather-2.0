@@ -11,13 +11,13 @@ public class Weather20Application extends Application {
 	static Context sContext;
 
 
-	public Weather20Application() {
-		sContext = this;
+	public static Context getContext() {
+		return sContext;
 	}
 
 
-	public static Context getContext() {
-		return sContext;
+	public Weather20Application() {
+		sContext = this;
 	}
 
 }

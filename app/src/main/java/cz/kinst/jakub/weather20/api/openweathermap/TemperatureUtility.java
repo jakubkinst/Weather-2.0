@@ -21,6 +21,6 @@ public class TemperatureUtility {
 
 	public static String getFormattedTemperature(double temp) {
 		double degrees = Preferences.get().isTempMetric() ? TemperatureUtility.kelvinToCelsius(temp) : TemperatureUtility.kelvinToFahrenheit(temp);
-		return new DecimalFormat("#").format(degrees) + "°";
+		return new DecimalFormat("#").format(degrees).replaceAll("^-(?=0(.0*)?$)", "") + "°";
 	}
 }

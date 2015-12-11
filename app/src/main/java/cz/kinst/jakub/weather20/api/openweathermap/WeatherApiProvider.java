@@ -1,12 +1,7 @@
 package cz.kinst.jakub.weather20.api.openweathermap;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
-
-import cz.kinst.jakub.weather20.BuildConfig;
+import cz.kinst.jakub.weather20.api.ApiProvider;
 import retrofit.Call;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -17,10 +12,10 @@ import retrofit.http.Query;
 public class WeatherApiProvider {
 	private static final String WEATHER_APP_ID = "2de143494c0b295cca9337e1e96b00e0";
 
-	private static WeatherApiInterface sInstance;
+	private static WeatherInterface sInstance;
 
 
-	public interface WeatherApiInterface {
+	public interface WeatherInterface {
 		@GET("/data/2.5/weather?appid=" + WEATHER_APP_ID)
 		Call<CurrentWeatherResponse> getCurrent(@Query("lat") double latitude, @Query("lon") double longitude);
 
@@ -29,20 +24,9 @@ public class WeatherApiProvider {
 	}
 
 
-	public static WeatherApiInterface get() {
-		if(sInstance == null) {
-			OkHttpClient client = new OkHttpClient();
-			HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-			interceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-			client.interceptors().add(interceptor);
-
-			sInstance = new Retrofit.Builder()
-					.client(client)
-					.baseUrl("http://api.openweathermap.org")
-					.addConverterFactory(GsonConverterFactory.create())
-					.build()
-					.create(WeatherApiInterface.class);
-		}
+	public static WeatherInterface get() {
+		if(sInstance == null)
+			sInstance = ApiProvider.getRetrofitInterface("http://api.openweathermap.org", WeatherInterface.class);
 		return sInstance;
 	}
 }

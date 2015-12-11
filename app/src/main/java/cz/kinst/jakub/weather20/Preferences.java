@@ -15,16 +15,16 @@ public class Preferences {
 	private final Context mContext;
 
 
-	public Preferences(Context context) {
-		mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-		mContext = context;
-	}
-
-
 	public static Preferences get() {
 		if(sInstance == null)
 			sInstance = new Preferences(Weather20Application.getContext());
 		return sInstance;
+	}
+
+
+	public Preferences(Context context) {
+		mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+		mContext = context;
 	}
 
 
