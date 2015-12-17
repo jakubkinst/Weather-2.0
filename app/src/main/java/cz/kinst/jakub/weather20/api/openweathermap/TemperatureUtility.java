@@ -2,7 +2,7 @@ package cz.kinst.jakub.weather20.api.openweathermap;
 
 import java.text.DecimalFormat;
 
-import cz.kinst.jakub.weather20.Preferences;
+import cz.kinst.jakub.weather20.preferences.Preferences;
 
 
 /**

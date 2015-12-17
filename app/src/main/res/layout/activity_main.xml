@@ -5,6 +5,8 @@
 
 	<data>
 
+		<import type="cz.kinst.jakub.view.StatefulLayout.State"/>
+
 		<variable
 			name="viewModel"
 			type="cz.kinst.jakub.weather20.viewmodel.MainViewModel"/>
@@ -21,7 +23,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/app_bar_height"
 			android:fitsSystemWindows="true"
-			android:theme="@style/AppTheme.AppBarOverlay">
+			android:theme="@style/AppTheme.AppBarOverlay"
+			app:expanded="@{viewModel.state == State.CONTENT}">
 
 			<android.support.design.widget.CollapsingToolbarLayout
 				android:id="@+id/toolbar_layout"

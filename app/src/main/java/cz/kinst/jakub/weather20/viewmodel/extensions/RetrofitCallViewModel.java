@@ -1,5 +1,7 @@
 package cz.kinst.jakub.weather20.viewmodel.extensions;
 
+import android.databinding.ViewDataBinding;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +13,7 @@ import retrofit.Callback;
 /**
  * Created by jakubkinst on 02/12/15.
  */
-public abstract class RetrofitCallViewModel<S> extends BaseViewModel<S> {
+public abstract class RetrofitCallViewModel<S extends ViewDataBinding> extends BaseViewModel<S> {
 
 	private Map<String, Call> mCalls = new HashMap<>();
 

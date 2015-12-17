@@ -6,13 +6,14 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import cz.kinst.jakub.viewmodelbinding.BaseViewModel;
 import cz.kinst.jakub.viewmodelbinding.BaseViewModelActivity;
+import cz.kinst.jakub.viewmodelbinding.ViewModelBindingConfig;
 import cz.kinst.jakub.viewmodelbinding.permissions.PermissionHelperProvider;
 import cz.kinst.jakub.viewmodelbinding.permissions.PermissionsHelper;
-import cz.kinst.jakub.weather20.Preferences;
+import cz.kinst.jakub.weather20.BR;
 import cz.kinst.jakub.weather20.R;
 import cz.kinst.jakub.weather20.databinding.ActivityMainBinding;
+import cz.kinst.jakub.weather20.preferences.Preferences;
 import cz.kinst.jakub.weather20.viewmodel.MainViewModel;
 
 
@@ -22,14 +23,8 @@ public class MainActivity extends BaseViewModelActivity<ActivityMainBinding, Mai
 
 
 	@Override
-	public int getViewModelDataBindingId() {
-		return cz.kinst.jakub.weather20.BR.viewModel;
-	}
-
-
-	@Override
-	public int getLayoutResource() {
-		return R.layout.activity_main;
+	public ViewModelBindingConfig getViewModelBindingConfig() {
+		return new ViewModelBindingConfig(R.layout.activity_main, MainViewModel.class, BR.viewModel);
 	}
 
 
@@ -75,11 +70,5 @@ public class MainActivity extends BaseViewModelActivity<ActivityMainBinding, Mai
 		setSupportActionBar(getBinding().toolbar);
 		if(getSupportActionBar() != null)
 			getSupportActionBar().setDisplayShowTitleEnabled(false);
-	}
-
-
-	@Override
-	protected Class<? extends BaseViewModel> getViewModelClass() {
-		return MainViewModel.class;
 	}
 }
