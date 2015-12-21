@@ -14,14 +14,14 @@ public class Preferences extends BasePreferences {
 	private static Preferences sInstance;
 
 
-	public static Preferences get() {
-		if(sInstance == null) sInstance = new Preferences(Weather20Application.getContext());
-		return sInstance;
+	protected Preferences(Context context) {
+		super(context);
 	}
 
 
-	protected Preferences(Context context) {
-		super(context);
+	public static Preferences get() {
+		if(sInstance == null) sInstance = new Preferences(Weather20Application.getContext());
+		return sInstance;
 	}
 
 

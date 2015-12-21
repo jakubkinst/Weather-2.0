@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="pref_key_metric">metric</string>
 
+	<!--Preference keys and their default values-->
+	<string name="pref_key_metric">metric</string>
 	<bool name="pref_default_metric">true</bool>
 </resources>

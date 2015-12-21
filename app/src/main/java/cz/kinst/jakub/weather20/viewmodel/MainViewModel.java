@@ -48,7 +48,7 @@ public class MainViewModel extends RetrofitCallViewModel<ActivityMainBinding> im
 	private static final double DEFAULT_LATITUDE = 50.088182;
 	private static final double DEFAULT_LONGITUDE = 14.420210;
 
-	// public fields and observables
+	// Public fields and observables
 	public final ItemView forecastItemView = ItemView.of(BR.itemViewModel, R.layout.item_forecast);
 	public final ObservableList<ForecastItemViewModel> weatherForecast = new ObservableArrayList<>();
 	public final ObservableField<CurrentWeatherResponse> currentWeather = new ObservableField<>();

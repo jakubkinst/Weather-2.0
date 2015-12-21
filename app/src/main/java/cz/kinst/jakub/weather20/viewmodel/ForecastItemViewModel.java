@@ -11,17 +11,20 @@ import cz.kinst.jakub.weather20.handler.ForecastItemHandler;
  * Created by jakubkinst on 11/12/15.
  */
 public class ForecastItemViewModel {
+
+	// Public fields and observables
 	public ObservableField<WeatherForecastResponse.Forecast> forecast = new ObservableField<>();
-	private ForecastItemHandler handler;
+
+	private ForecastItemHandler mHandler;
 
 
 	public ForecastItemViewModel(WeatherForecastResponse.Forecast forecast, ForecastItemHandler handler) {
 		this.forecast.set(forecast);
-		this.handler = handler;
+		this.mHandler = handler;
 	}
 
 
 	public void onItemClicked(View v) {
-		handler.onForecastClicked(forecast.get());
+		mHandler.onForecastClicked(forecast.get());
 	}
 }

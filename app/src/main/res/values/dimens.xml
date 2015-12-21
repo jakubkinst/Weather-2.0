@@ -1,10 +1,17 @@
 <resources>
-	<dimen name="app_bar_height">240dp</dimen>
-	<dimen name="fab_margin">16dp</dimen>
-	<dimen name="text_margin">16dp</dimen>
-	<dimen name="spacing_24">24dp</dimen>
+
+	<!--Global Android Grid Spacing-->
+	<dimen name="spacing_4">4dp</dimen>
 	<dimen name="spacing_8">8dp</dimen>
 	<dimen name="spacing_16">16dp</dimen>
+	<dimen name="spacing_24">24dp</dimen>
 	<dimen name="spacing_32">32dp</dimen>
-	<dimen name="spacing_4">4dp</dimen>
+	<dimen name="spacing_40">40dp</dimen>
+	<dimen name="spacing_48">48dp</dimen>
+	<dimen name="spacing_56">56dp</dimen>
+	<dimen name="spacing_72">72dp</dimen>
+
+	<dimen name="global_app_bar_height">240dp</dimen>
+	<dimen name="global_fab_margin">16dp</dimen>
+	<dimen name="global_text_margin">16dp</dimen>
 </resources>

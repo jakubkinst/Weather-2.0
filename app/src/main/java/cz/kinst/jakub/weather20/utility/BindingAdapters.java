@@ -12,7 +12,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
  * Created by jakubkinst on 03/12/15.
  */
 public class BindingAdapters {
-	@BindingAdapter({"imageUrl"})
+	@BindingAdapter("imageUrl")
 	public static void setImageUrl(ImageView imageView, String url) {
 		if(url != null && !url.trim().isEmpty())
 			Glide.with(imageView.getContext())
@@ -24,19 +24,19 @@ public class BindingAdapters {
 	}
 
 
-	@BindingAdapter({"hide"})
+	@BindingAdapter("hide")
 	public static void setHide(View view, boolean hide) {
 		view.setVisibility(hide ? View.GONE : View.VISIBLE);
 	}
 
 
-	@BindingAdapter({"show"})
+	@BindingAdapter("show")
 	public static void setShow(View view, boolean show) {
 		view.setVisibility(show ? View.VISIBLE : View.GONE);
 	}
 
 
-	@BindingAdapter({"invisible"})
+	@BindingAdapter("invisible")
 	public static void setInvisible(View view, boolean invisible) {
 		view.setVisibility(invisible ? View.INVISIBLE : View.VISIBLE);
 	}
