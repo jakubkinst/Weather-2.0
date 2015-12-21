@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 
 /**
@@ -17,6 +18,7 @@ public class BindingAdapters {
 			Glide.with(imageView.getContext())
 					.load(url)
 					.crossFade()
+					.diskCacheStrategy(DiskCacheStrategy.ALL)
 					.thumbnail(0.5f)
 					.into(imageView);
 	}
