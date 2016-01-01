@@ -1,23 +1,15 @@
 package cz.kinst.jakub.weather20;
 
 import android.app.Application;
-import android.content.Context;
+
+import cz.kinst.jakub.weather20.tool.ContextProvider;
 
 
 /**
  * Created by jakubkinst on 02/12/15.
  */
 public class Weather20Application extends Application {
-	static Context sContext;
-
-
 	public Weather20Application() {
-		sContext = this;
+		ContextProvider.initialize(this);
 	}
-
-
-	public static Context getContext() {
-		return sContext;
-	}
-
 }

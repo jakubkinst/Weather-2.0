@@ -3,8 +3,8 @@ package cz.kinst.jakub.weather20.preferences;
 import android.content.Context;
 
 import cz.kinst.jakub.weather20.R;
-import cz.kinst.jakub.weather20.Weather20Application;
 import cz.kinst.jakub.weather20.preferences.base.BasePreferences;
+import cz.kinst.jakub.weather20.tool.ContextProvider;
 
 
 /**
@@ -20,7 +20,7 @@ public class Preferences extends BasePreferences {
 
 
 	public static Preferences get() {
-		if(sInstance == null) sInstance = new Preferences(Weather20Application.getContext());
+		if(sInstance == null) sInstance = new Preferences(ContextProvider.getContext());
 		return sInstance;
 	}
 
