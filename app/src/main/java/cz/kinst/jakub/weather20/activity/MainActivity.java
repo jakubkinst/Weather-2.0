@@ -6,18 +6,18 @@ import android.support.annotation.Nullable;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import cz.kinst.jakub.viewmodelbinding.BaseViewModelActivity;
+import cz.kinst.jakub.viewmodelbinding.ViewModelActivity;
 import cz.kinst.jakub.viewmodelbinding.ViewModelBindingConfig;
-import cz.kinst.jakub.viewmodelbinding.permissions.PermissionHelperProvider;
-import cz.kinst.jakub.viewmodelbinding.permissions.PermissionsHelper;
 import cz.kinst.jakub.weather20.BR;
 import cz.kinst.jakub.weather20.R;
 import cz.kinst.jakub.weather20.databinding.ActivityMainBinding;
+import cz.kinst.jakub.weather20.permissions.PermissionHelperProvider;
+import cz.kinst.jakub.weather20.permissions.PermissionsHelper;
 import cz.kinst.jakub.weather20.preferences.Preferences;
 import cz.kinst.jakub.weather20.viewmodel.MainViewModel;
 
 
-public class MainActivity extends BaseViewModelActivity<ActivityMainBinding, MainViewModel> implements PermissionHelperProvider {
+public class MainActivity extends ViewModelActivity<ActivityMainBinding, MainViewModel> implements PermissionHelperProvider {
 
 	private PermissionsHelper mPermissionsHelper = new PermissionsHelper(this);
 

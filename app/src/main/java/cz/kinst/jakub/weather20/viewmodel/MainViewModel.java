@@ -17,7 +17,6 @@ import com.annimon.stream.Stream;
 import java.util.Random;
 
 import cz.kinst.jakub.view.StatefulLayout;
-import cz.kinst.jakub.viewmodelbinding.permissions.PermissionHelperProvider;
 import cz.kinst.jakub.weather20.BR;
 import cz.kinst.jakub.weather20.R;
 import cz.kinst.jakub.weather20.api.flickr.FlickrApiProvider;
@@ -27,6 +26,7 @@ import cz.kinst.jakub.weather20.api.openweathermap.WeatherApiProvider;
 import cz.kinst.jakub.weather20.api.openweathermap.WeatherForecastResponse;
 import cz.kinst.jakub.weather20.databinding.ActivityMainBinding;
 import cz.kinst.jakub.weather20.handler.ForecastItemHandler;
+import cz.kinst.jakub.weather20.permissions.PermissionHelperProvider;
 import cz.kinst.jakub.weather20.preferences.Preferences;
 import cz.kinst.jakub.weather20.viewmodel.extensions.RetrofitCallViewModel;
 import me.tatarka.bindingcollectionadapter.ItemView;

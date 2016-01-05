@@ -40,6 +40,11 @@ public class ContextProvider {
 	}
 
 
+	public static String getString(@StringRes int resourceId, Object... args) {
+		return getResources().getString(resourceId, args);
+	}
+
+
 	public static int getColor(@ColorRes int resourceId) {
 		return ContextCompat.getColor(getContext(), resourceId);
 	}
